@@ -1,0 +1,8 @@
+[package]
+name = "aoc2020"
+version = "0.1.0"
+authors = ["Paul Horn <developer@knutwalker.de>"]
+description = "Advent of Code 2020 solutions for @knutwalker"
+edition = "2018"
+license = "MIT"
+publish = false
