@@ -2,12 +2,15 @@
 extern crate aoc2020;
 use aoc2020::Solution;
 
+mod day01;
+
 fn main() {
     for day in std::env::args()
         .skip(1)
         .filter_map(|s| s.parse::<u8>().ok())
     {
         let (res1, res2) = match day {
+            1 => day01::Solver::solve(),
             x => unimplemented!("Day {} is not yet implemented", x),
         };
 
