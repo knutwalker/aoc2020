@@ -5,6 +5,7 @@ use aoc2020::Solution;
 mod day01;
 mod day02;
 mod day03;
+mod day04;
 
 fn main() {
     for day in std::env::args()
@@ -15,6 +16,7 @@ fn main() {
             1 => day01::Solver::solve(),
             2 => day02::Solver::solve(),
             3 => day03::Solver::solve(),
+            4 => day04::Solver::solve(),
             x => unimplemented!("Day {} is not yet implemented", x),
         };
 
