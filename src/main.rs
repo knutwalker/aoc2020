@@ -22,6 +22,7 @@ mod day17;
 mod day18;
 mod day19;
 mod day20;
+mod day21;
 
 fn main() {
     for day in std::env::args()
@@ -49,6 +50,7 @@ fn main() {
             18 => day18::Solver::solve(),
             19 => day19::Solver::solve(),
             20 => day20::Solver::solve(),
+            21 => day21::Solver::solve(),
             x => unimplemented!("Day {} is not yet implemented", x),
         };
 
