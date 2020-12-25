@@ -1,4 +1,4 @@
-use std::{fmt::Debug, marker::PhantomData, str::FromStr};
+use std::{fmt::Debug, fmt::Display, marker::PhantomData, str::FromStr};
 
 pub trait PuzzleInput
 where
@@ -85,9 +85,9 @@ pub trait Solution {
     }
 
     #[inline]
-    fn solve() -> (Box<dyn std::fmt::Debug>, Box<dyn std::fmt::Debug>)
+    fn solve() -> (Box<dyn Display>, Box<dyn Display>)
     where
-        Self::Output: Debug + 'static,
+        Self::Output: Display + 'static,
     {
         let (res1, res2) = Self::run_on_input();
         (Box::new(res1), Box::new(res2))

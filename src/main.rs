@@ -62,7 +62,7 @@ fn main() {
             x => unimplemented!("Day {} is not yet implemented", x),
         };
 
-        println!("Day {:02} Part 1:\t{:?}", day, res1);
-        println!("Day {:02} Part 2:\t{:?}", day, res2);
+        println!("Day {:02} Part 1:\t{}", day, res1);
+        println!("Day {:02} Part 2:\t{}", day, res2);
     }
 }
