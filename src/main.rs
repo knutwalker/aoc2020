@@ -1,3 +1,5 @@
+// #![feature(try_blocks)]
+//
 #[macro_use]
 extern crate aoc2020;
 use aoc2020::Solution;
