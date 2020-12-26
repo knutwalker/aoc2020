@@ -17,19 +17,6 @@ type Tile = (i32, i32);
 type Grid = HashSet<Tile>;
 
 #[derive(Debug, Copy, Clone)]
-enum State {
-    Neutral,
-    North,
-    South,
-}
-
-impl Default for State {
-    fn default() -> Self {
-        Self::Neutral
-    }
-}
-
-#[derive(Debug, Copy, Clone)]
 enum Dir {
     E,
     SE,
@@ -44,40 +31,16 @@ fn intial_grid(input: Vec<Vec<u8>>) -> Grid {
         .into_iter()
         .map(|line| {
             line.into_iter()
-                .scan(State::Neutral, |s, c| {
-                    Some(match c {
-                        b'e' => Some(match std::mem::take(s) {
-                            State::Neutral => Dir::E,
-                            State::North => Dir::NE,
-                            State::South => Dir::SE,
-                        }),
-                        b'w' => Some(match std::mem::take(s) {
-                            State::Neutral => Dir::W,
-                            State::North => Dir::NW,
-                            State::South => Dir::SW,
-                        }),
-                        b'n' => {
-                            *s = State::North;
-                            None
-                        }
-                        b's' => {
-                            *s = State::South;
-                            None
-                        }
-                        x => unreachable!("invalid input: {}", x),
-                    })
-                })
-                .flatten()
-                .fold((0, 0), |(x, y), dir| match dir {
-                    Dir::E => (x + 2, y),
-                    Dir::SE => (x + 1, y - 1),
-                    Dir::SW => (x - 1, y - 1),
-                    Dir::W => (x - 2, y),
-                    Dir::NW => (x - 1, y + 1),
-                    Dir::NE => (x + 1, y + 1),
+                .fold((0, 0, 0), |(x, y, step), dir| match dir {
+                    b'e' => (x + (2 >> step), y, 0),
+                    b'w' => (x - (2 >> step), y, 0),
+                    b'n' => (x, y + 1, 1),
+                    b's' => (x, y - 1, 1),
+                    x => unreachable!("invalid input: {}", x),
                 })
         })
-        .fold(Grid::new(), |mut grid, tile| {
+        .fold(Grid::new(), |mut grid, (x, y, _)| {
+            let tile = (x, y);
             if !grid.remove(&tile) {
                 grid.insert(tile);
             }
